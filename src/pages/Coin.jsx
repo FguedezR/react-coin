@@ -34,16 +34,34 @@ export default function Coin() {
   if (!coin) return <p>Loading...</p>;
 
   return (
-    <div>
+    <div className="coin-detail">
       <h1>
-        {coin.name} ({coin.symbol})
+        {coin.name}{" "}
+        <span style={{ color: "var(--muted)", fontSize: "1rem" }}>
+          {coin.symbol}
+        </span>
       </h1>
-      <p>Rank: {coin.rank}</p>
-      <p>Price: ${parseFloat(coin.priceUsd).toFixed(2)}</p>
-      <p>Market Cap: ${parseFloat(coin.marketCapUsd).toFixed(0)}</p>
-      <p>24h Change: {parseFloat(coin.changePercent24Hr).toFixed(2)}%</p>
-      <button onClick={toggleFavorite}>
-        {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+      <p>
+        Rank <span>#{coin.rank}</span>
+      </p>
+      <p>
+        Price <span>${parseFloat(coin.priceUsd).toFixed(2)}</span>
+      </p>
+      <p>
+        Market Cap <span>${parseFloat(coin.marketCapUsd).toFixed(0)}</span>
+      </p>
+      <p>
+        24h Change{" "}
+        <span
+          className={
+            parseFloat(coin.changePercent24Hr) >= 0 ? "positive" : "negative"
+          }
+        >
+          {parseFloat(coin.changePercent24Hr).toFixed(2)}%
+        </span>
+      </p>
+      <button onClick={toggleFavorite} className={isFavorite ? "active" : ""}>
+        {isFavorite ? "★ Remove from Favorites" : "☆ Add to Favorites"}
       </button>
     </div>
   );
